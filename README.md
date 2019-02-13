@@ -14,7 +14,7 @@ Changes from the original:
 * [ ] Added support for OAuth flow to retrieve access token
 * [x] Added go module
 * [x] Added support for non-default `http.Client`
-* [ ] Added support for `context.Context`
+* [x] Added support for `context.Context`
 
 ## License
 

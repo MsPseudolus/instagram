@@ -7,7 +7,9 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/recentralized/instagram"
 )
@@ -67,6 +69,20 @@ func TestSelf(t *testing.T) {
 
 	self, err := api.GetSelf(ctx)
 	checkRes(t, self.Meta, err)
+}
+
+func TestContextDeadline(t *testing.T) {
+	ctx := context.Background()
+	api := newAPI()
+
+	// An impossibly short timeout
+	ctx, cancel := context.WithTimeout(ctx, time.Duration(1))
+	defer cancel()
+
+	_, err := api.GetSelf(ctx)
+	if !strings.HasSuffix(err.Error(), context.DeadlineExceeded.Error()) {
+		t.Fatalf("Want cause to be DeadlineExceeded got %v", err)
+	}
 }
 
 func TestGetRecentMedia(t *testing.T) {
