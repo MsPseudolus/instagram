@@ -386,8 +386,9 @@ func authorizedRequest(t *testing.T) {
 }
 
 func checkRes(t *testing.T, m *Meta, err error) {
+	t.Helper()
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 	if m == nil || m.Code != 200 {
 		t.Error("Meta not right", m)
