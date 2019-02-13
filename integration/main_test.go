@@ -97,18 +97,61 @@ func TestGetRecentMedia(t *testing.T) {
 	if len(res.Medias) != 3 {
 		t.Error("Count didn't apply")
 	}
+}
 
-	//nextRes, err := api.NextMedias(res.Pagination)
-	//checkRes(t, nextRes.Meta, err)
+func TestGetRecentMediaPagination(t *testing.T) {
+	ctx := context.Background()
+	api := newAPI()
 
-	//if nextRes.Pagination.Pagination != nil {
-	//t.Error("Pagination should be not valid!", nextRes.Pagination.Pagination)
-	//}
+	params := url.Values{}
+	params.Set("count", "3")
+	res, err := api.GetRecentMedia(ctx, params)
+	checkRes(t, res.Meta, err)
 
-	//nextNextRes, err := api.NextMedias(nextRes.Pagination)
-	//if len(nextNextRes.Medias) > 0 {
-	//t.Error("Pagination returned non-nil next request after nil pagination!")
-	//}
+	nextRes, err := api.NextMedias(ctx, res.Pagination)
+	checkRes(t, nextRes.Meta, err)
+
+	if len(nextRes.Medias) == 0 {
+		t.Error("Didn't return next")
+	}
+}
+
+func TestGetRecentMediaIterate(t *testing.T) {
+	ctx := context.Background()
+	api := newAPI()
+
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	params := url.Values{}
+	params.Set("count", "2")
+	res, err := api.GetRecentMedia(ctx, params)
+	checkRes(t, res.Meta, err)
+
+	var count int
+
+	mediac, errc := api.IterateMedia(ctx, res)
+
+	const max = 7
+	for m := range mediac {
+		count++
+		if count >= max {
+			cancel()
+		}
+		if m.Id == "" {
+			t.Errorf("Id is empty: %v", m)
+		}
+	}
+	for err := range errc {
+		if !strings.Contains(err.Error(), context.Canceled.Error()) {
+			t.Fatalf("Got error: %s", err)
+		}
+	}
+	// NOTE: non-strict equality check because we get max or max+1. Not
+	// worth debugging right now
+	if got, want := count, max; got < want {
+		t.Errorf("Count got %d want %d", got, want)
+	}
 }
 
 func TestGetMediaRecentComments(t *testing.T) {

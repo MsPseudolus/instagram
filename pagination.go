@@ -6,17 +6,10 @@ import (
 	"strings"
 )
 
-// Get the next page of media
+// NextMedias returns the next page of media
 func (api *Api) NextMedias(ctx context.Context, mp *MediaPagination) (res *PaginatedMediasResponse, err error) {
 	res = new(PaginatedMediasResponse)
 	err = api.next(ctx, mp.Pagination, res)
-	return
-}
-
-// Get the next page of user
-func (api *Api) NextUsers(ctx context.Context, up *UserPagination) (res *PaginatedUsersResponse, err error) {
-	res = new(PaginatedUsersResponse)
-	err = api.next(ctx, up.Pagination, res)
 	return
 }
 
@@ -39,7 +32,7 @@ func (api *Api) next(ctx context.Context, p *Pagination, res interface{}) error 
 	return api.do(ctx, req, res)
 }
 
-// Return the next page uri and parameters
+// NextPage returns the next page's uri and parameters
 func (p *Pagination) NextPage() (done bool, uri string, path string, params url.Values, err error) {
 	if p == nil || p.NextUrl == "" {
 		// We're done. Theres no more pages
