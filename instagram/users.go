@@ -14,7 +14,7 @@ func (api *Api) GetSelf() (res *UserResponse, err error) {
 
 // Get the most recent media published by a user. May return a mix of both image and video types.
 // Gets /users/{user-id}/media/recent
-func (api *Api) GetRecentMedia(string, params url.Values) (res *PaginatedMediasResponse, err error) {
+func (api *Api) GetRecentMedia(params url.Values) (res *PaginatedMediasResponse, err error) {
 	res = new(PaginatedMediasResponse)
 	err = api.get("/users/self/media/recent", params, res)
 	return
