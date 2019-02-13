@@ -2,6 +2,7 @@
 package instagram
 
 import (
+	"context"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
@@ -98,7 +99,7 @@ func (api *Api) extendParams(p url.Values) url.Values {
 	return p
 }
 
-func (api *Api) get(path string, params url.Values, r interface{}) error {
+func (api *Api) get(ctx context.Context, path string, params url.Values, r interface{}) error {
 	params = api.extendParams(params)
 	// Sign request if ForceSignedRequest is set to true
 	if api.EnforceSignedRequest {
@@ -109,10 +110,11 @@ func (api *Api) get(path string, params url.Values, r interface{}) error {
 	if err != nil {
 		return err
 	}
-	return api.do(req, r)
+	return api.do(ctx, req, r)
 }
 
-func (api *Api) do(req *http.Request, r interface{}) error {
+func (api *Api) do(ctx context.Context, req *http.Request, r interface{}) error {
+	req = req.WithContext(ctx)
 	resp, err := api.HTTPClient.Do(req)
 	if err != nil {
 		return err

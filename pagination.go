@@ -1,25 +1,26 @@
 package instagram
 
 import (
+	"context"
 	"net/url"
 	"strings"
 )
 
 // Get the next page of media
-func (api *Api) NextMedias(mp *MediaPagination) (res *PaginatedMediasResponse, err error) {
+func (api *Api) NextMedias(ctx context.Context, mp *MediaPagination) (res *PaginatedMediasResponse, err error) {
 	res = new(PaginatedMediasResponse)
-	err = api.next(mp.Pagination, res)
+	err = api.next(ctx, mp.Pagination, res)
 	return
 }
 
 // Get the next page of user
-func (api *Api) NextUsers(up *UserPagination) (res *PaginatedUsersResponse, err error) {
+func (api *Api) NextUsers(ctx context.Context, up *UserPagination) (res *PaginatedUsersResponse, err error) {
 	res = new(PaginatedUsersResponse)
-	err = api.next(up.Pagination, res)
+	err = api.next(ctx, up.Pagination, res)
 	return
 }
 
-func (api *Api) next(p *Pagination, res interface{}) error {
+func (api *Api) next(ctx context.Context, p *Pagination, res interface{}) error {
 	done, uri, path, uriParams, err := p.NextPage()
 	if err != nil || done == true {
 		return err
@@ -35,7 +36,7 @@ func (api *Api) next(p *Pagination, res interface{}) error {
 		return err
 	}
 
-	return api.do(req, res)
+	return api.do(ctx, req, res)
 }
 
 // Return the next page uri and parameters

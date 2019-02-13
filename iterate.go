@@ -1,9 +1,11 @@
 package instagram
 
+import "context"
+
 // IterateMedia makes pagination easy by converting the repeated api.NextMedias() call to a channel of media.
 // Media will be passed in the reverse order of individual requests, for instance GetUserRecentMedia will go in reverse CreatedTime order.
 // If you desire to break early, pass in a doneChan and close when you are breaking from iteration
-func (api *Api) IterateMedia(res *PaginatedMediasResponse, doneChan <-chan bool) (<-chan *Media, <-chan error) {
+func (api *Api) IterateMedia(ctx context.Context, res *PaginatedMediasResponse, doneChan <-chan bool) (<-chan *Media, <-chan error) {
 	mediaChan := make(chan *Media)
 	errChan := make(chan error, 1)
 
@@ -12,6 +14,8 @@ func (api *Api) IterateMedia(res *PaginatedMediasResponse, doneChan <-chan bool)
 		defer close(errChan)
 
 		for {
+			// TODO: return on ctx.Done()
+
 			if res == nil {
 				return
 			}
@@ -32,7 +36,7 @@ func (api *Api) IterateMedia(res *PaginatedMediasResponse, doneChan <-chan bool)
 
 			// Paginate to next response
 			var err error
-			res, err = api.NextMedias(res.Pagination)
+			res, err = api.NextMedias(ctx, res.Pagination)
 			if err != nil {
 				errChan <- err
 				return
@@ -75,7 +79,7 @@ func (api *Api) IterateUsers(res *PaginatedUsersResponse, doneChan <-chan bool) 
 
 			// Paginate to next response
 			var err error
-			res, err = api.NextUsers(res.Pagination)
+			res, err = api.NextUsers(context.TODO(), res.Pagination)
 			if err != nil {
 				errChan <- err
 				return

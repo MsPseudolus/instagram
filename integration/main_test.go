@@ -1,6 +1,7 @@
 package instagram_test
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log"
@@ -52,26 +53,29 @@ func newAPI() *instagram.Api {
 }
 
 func TestVerifyCredentials(t *testing.T) {
+	ctx := context.Background()
 	api := newAPI()
 
-	if ok, err := api.VerifyCredentials(); !ok {
+	if ok, err := api.VerifyCredentials(ctx); !ok {
 		t.Error(err)
 	}
 }
 
 func TestSelf(t *testing.T) {
+	ctx := context.Background()
 	api := newAPI()
 
-	self, err := api.GetSelf()
+	self, err := api.GetSelf(ctx)
 	checkRes(t, self.Meta, err)
 }
 
 func TestGetRecentMedia(t *testing.T) {
+	ctx := context.Background()
 	api := newAPI()
 
 	params := url.Values{}
 	params.Set("count", "3")
-	res, err := api.GetRecentMedia(params)
+	res, err := api.GetRecentMedia(ctx, params)
 	checkRes(t, res.Meta, err)
 
 	if len(res.Medias) != 3 {
@@ -92,6 +96,7 @@ func TestGetRecentMedia(t *testing.T) {
 }
 
 func TestGetMediaRecentComments(t *testing.T) {
+	ctx := context.Background()
 	api := newAPI()
 
 	mediaID, err := findMediaWithComments()
@@ -99,7 +104,7 @@ func TestGetMediaRecentComments(t *testing.T) {
 		t.Fatalf("get media id: %s", err)
 	}
 
-	res, err := api.GetMediaRecentComments(mediaID)
+	res, err := api.GetMediaRecentComments(ctx, mediaID)
 	checkRes(t, res.Meta, err)
 
 	if len(res.Comments) == 0 {
@@ -110,12 +115,13 @@ func TestGetMediaRecentComments(t *testing.T) {
 // -- helpers --
 
 func findMediaWithComments() (string, error) {
+	ctx := context.Background()
 	api := newAPI()
 
 	params := url.Values{}
 	params.Set("count", "20")
 
-	res, err := api.GetRecentMedia(params)
+	res, err := api.GetRecentMedia(ctx, params)
 	if err != nil {
 		return "", err
 	}
