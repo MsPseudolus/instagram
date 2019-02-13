@@ -23,6 +23,7 @@ type Api struct {
 	ClientSecret         string
 	AccessToken          string
 	EnforceSignedRequest bool
+	HTTPClient           *http.Client
 	Header               http.Header
 }
 
@@ -41,6 +42,7 @@ func New(clientId string, clientSecret string, accessToken string, enforceSigned
 		ClientId:             clientId,
 		ClientSecret:         clientSecret,
 		AccessToken:          accessToken,
+		HTTPClient:           &http.Client{},
 		EnforceSignedRequest: enforceSignedRequest,
 	}
 }
@@ -111,7 +113,7 @@ func (api *Api) get(path string, params url.Values, r interface{}) error {
 }
 
 func (api *Api) do(req *http.Request, r interface{}) error {
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := api.HTTPClient.Do(req)
 	if err != nil {
 		return err
 	}

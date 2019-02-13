@@ -13,7 +13,7 @@ Changes from the original:
 * [ ] Added support new media type "carousel"
 * [ ] Added support for OAuth flow to retrieve access token
 * [x] Added go module
-* [ ] Added support for non-default `http.Client`
+* [x] Added support for non-default `http.Client`
 * [ ] Added support for `context.Context`
 
 ## License
