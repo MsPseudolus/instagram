@@ -4,7 +4,7 @@ An [instagram](http://instagram.com) [API](http://instagram.com/developer) wrapp
 
 ## Features
 
-Originally [golang-instagram](https://github.com/yanatan16/golang-instagram).
+Originally [yanatan16/golang-instagram](https://github.com/yanatan16/golang-instagram).
 Modernized and updated to match changes to the Instagram API.
 
 Changes from the original:
