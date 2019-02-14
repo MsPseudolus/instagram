@@ -112,7 +112,7 @@ func TestGetRecentMediaIterate(t *testing.T) {
 
 	mediac, errc := api.IterateMedia(ctx, res)
 
-	const max = 7
+	const max = 5 // multiple pages, and quit partway through a page.
 	for m := range mediac {
 		count++
 		if count >= max {
