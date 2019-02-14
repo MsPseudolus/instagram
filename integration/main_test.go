@@ -3,6 +3,7 @@ package instagram_test
 import (
 	"context"
 	"errors"
+	"flag"
 	"fmt"
 	"log"
 	"net/url"
@@ -28,6 +29,12 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	flag.Parse()
+
+	if testing.Short() {
+		log.Printf("skipping in short mode")
+		os.Exit(0)
+	}
 
 	clientID = os.Getenv(envClientID)
 	clientSecret = os.Getenv(envClientSecret)
