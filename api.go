@@ -2,6 +2,7 @@
 package instagram
 
 import (
+	"context"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
@@ -23,6 +24,7 @@ type Api struct {
 	ClientSecret         string
 	AccessToken          string
 	EnforceSignedRequest bool
+	HTTPClient           *http.Client
 	Header               http.Header
 }
 
@@ -41,6 +43,7 @@ func New(clientId string, clientSecret string, accessToken string, enforceSigned
 		ClientId:             clientId,
 		ClientSecret:         clientSecret,
 		AccessToken:          accessToken,
+		HTTPClient:           &http.Client{},
 		EnforceSignedRequest: enforceSignedRequest,
 	}
 }
@@ -96,7 +99,7 @@ func (api *Api) extendParams(p url.Values) url.Values {
 	return p
 }
 
-func (api *Api) get(path string, params url.Values, r interface{}) error {
+func (api *Api) get(ctx context.Context, path string, params url.Values, r interface{}) error {
 	params = api.extendParams(params)
 	// Sign request if ForceSignedRequest is set to true
 	if api.EnforceSignedRequest {
@@ -107,11 +110,12 @@ func (api *Api) get(path string, params url.Values, r interface{}) error {
 	if err != nil {
 		return err
 	}
-	return api.do(req, r)
+	return api.do(ctx, req, r)
 }
 
-func (api *Api) do(req *http.Request, r interface{}) error {
-	resp, err := http.DefaultClient.Do(req)
+func (api *Api) do(ctx context.Context, req *http.Request, r interface{}) error {
+	req = req.WithContext(ctx)
+	resp, err := api.HTTPClient.Do(req)
 	if err != nil {
 		return err
 	}
@@ -142,7 +146,7 @@ func decodeResponse(body io.Reader, to interface{}) error {
 }
 
 func apiError(resp *http.Response) error {
-	m := new(MetaResponse)
+	m := new(metaResponse)
 	if err := decodeResponse(resp.Body, m); err != nil {
 		return err
 	}
