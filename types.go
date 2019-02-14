@@ -28,24 +28,24 @@ type Media struct {
 	UsersInPhoto   []UserPosition `json:"users_in_photo"`
 	Filter         string
 	Tags           []string
-	Comments       *Comments
-	Caption        *Caption
-	Likes          *Likes
+	Comments       Comments
+	Caption        Caption
+	Likes          Likes
 	Link           string
-	User           *User
+	User           User
 	CreatedTime    StringUnixTime `json:"created_time"`
-	Images         *Images
+	Images         Images
 	Videos         *Videos
 	CarouselMedias []CarouselMedia `json:"carousel_media"`
-	Location       *Location
+	Location       Location
 	UserHasLiked   bool `json:"user_has_liked"`
 	Attribution    *Attribution
 }
 
 // A pair of user object and position
 type UserPosition struct {
-	User     *User
-	Position *Position
+	User     User
+	Position Position
 }
 
 // A position in a media
@@ -68,7 +68,7 @@ type Comments struct {
 type Comment struct {
 	CreatedTime StringUnixTime `json:"created_time"`
 	Text        string
-	From        *User
+	From        User
 	Id          string
 }
 
@@ -94,14 +94,14 @@ type Image struct {
 }
 
 type Videos struct {
-	LowResolution      *Video `json:"low_resolution"`
-	StandardResolution *Video `json:"standard_resolution"`
+	LowResolution      Video `json:"low_resolution"`
+	StandardResolution Video `json:"standard_resolution"`
 }
 
 type CarouselMedia struct {
 	Type         string
-	Images       *Images
-	Videos       *Images
+	Images       Images
+	Videos       Images
 	UsersInPhoto []UserPosition `json:"users_in_photo"`
 }
 

@@ -165,7 +165,7 @@ func findMediaWithComments() (string, error) {
 		return "", err
 	}
 	for _, m := range res.Medias {
-		if m.Comments != nil && m.Comments.Count > 0 {
+		if m.Comments.Count > 0 {
 			log.Printf("M C %d", m.Comments.Count)
 			return m.Id, nil
 		}

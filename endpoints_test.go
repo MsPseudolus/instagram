@@ -26,26 +26,26 @@ func TestMediaTypes(t *testing.T) {
 				Link:   "https://www.instagram.com/p/Bt39ZJLHKSTFwXShw402xx8W9loUPHTyH5BsqY0/",
 				Filter: "Crema",
 
-				User: &User{
+				User: User{
 					Id:             "11073382793",
 					Username:       "go_ig_test_0219",
 					FullName:       "Golang Client",
 					ProfilePicture: "https://scontent-sjc3-1.cdninstagram.com/vp/504ac2fa79adb1d412b31cab19be8d36/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-sjc3-1.cdninstagram.com",
 				},
 
-				Likes: &Likes{
+				Likes: Likes{
 					Count: 1,
 				},
 
-				Comments: &Comments{
+				Comments: Comments{
 					Count: 2,
 				},
 
-				Caption: &Caption{
+				Caption: Caption{
 					Id:          "18002756710177046",
 					CreatedTime: "1550173420",
 					Text:        "Photo post #0219test",
-					From: &User{
+					From: User{
 						Id:             "11073382793",
 						Username:       "go_ig_test_0219",
 						FullName:       "Golang Client",
@@ -59,24 +59,24 @@ func TestMediaTypes(t *testing.T) {
 
 				UsersInPhoto: []UserPosition{
 					{
-						User: &User{
+						User: User{
 							Username: "rcarver",
 						},
-						Position: &Position{
+						Position: Position{
 							X: 0.57568438,
 							Y: 0.7938808374,
 						},
 					},
 				},
 
-				Location: &Location{
+				Location: Location{
 					Id:        float64(2.13051194e+08),
 					Name:      "Oakland, California",
 					Latitude:  37.8029,
 					Longitude: -122.2721,
 				},
 
-				Images: &Images{
+				Images: Images{
 					Thumbnail: Image{
 						Url:    "https://scontent.cdninstagram.com/vp/fd0f484647ad37dc3caf0a2cdf37ca16/5CE59582/t51.2885-15/e35/c0.135.1080.1080/s150x150/50552544_116846169429307_872782777322498633_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  150,
@@ -106,26 +106,18 @@ func TestMediaTypes(t *testing.T) {
 				Link:   "https://www.instagram.com/p/Bt39H_1HPI5YVhqU2BTNiI40_wBQerAXmEDoeU0/",
 				Filter: "Normal",
 
-				User: &User{
+				User: User{
 					Id:             "11073382793",
 					Username:       "go_ig_test_0219",
 					FullName:       "Golang Client",
 					ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
 				},
 
-				Likes: &Likes{
-					Count: 0,
-				},
-
-				Comments: &Comments{
-					Count: 0,
-				},
-
-				Caption: &Caption{
+				Caption: Caption{
 					Id:          "18063037396017626",
 					CreatedTime: "1550173280",
 					Text:        "Carousel photo and video #0219test #carouseltest",
-					From: &User{
+					From: User{
 						Id:             "11073382793",
 						Username:       "go_ig_test_0219",
 						FullName:       "Golang Client",
@@ -140,7 +132,7 @@ func TestMediaTypes(t *testing.T) {
 
 				UsersInPhoto: []UserPosition{},
 
-				Images: &Images{
+				Images: Images{
 					Thumbnail: Image{
 						Url:    "https://scontent.cdninstagram.com/vp/82e7dd474a6c6735614f8c306c0be3fb/5CDF80BF/t51.2885-15/e35/c0.0.1079.1079/s150x150/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  150,
@@ -161,7 +153,7 @@ func TestMediaTypes(t *testing.T) {
 				CarouselMedias: []CarouselMedia{
 					{
 						Type: "image",
-						Images: &Images{
+						Images: Images{
 							Thumbnail: Image{
 								Url:    "https://scontent.cdninstagram.com/vp/82e7dd474a6c6735614f8c306c0be3fb/5CDF80BF/t51.2885-15/e35/c0.0.1079.1079/s150x150/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 								Width:  150,
@@ -182,7 +174,7 @@ func TestMediaTypes(t *testing.T) {
 					},
 					{
 						Type: "video",
-						Videos: &Images{
+						Videos: Images{
 							LowResolution: Image{
 								Id:     "17973623890206697",
 								Url:    "https://scontent.cdninstagram.com/vp/289d214085a1d17234b1138781c0563b/5C685779/t50.2886-16/52133795_250694959199695_5368374984429273088_n.mp4?_nc_ht=scontent.cdninstagram.com",
