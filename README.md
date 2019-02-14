@@ -10,7 +10,7 @@ Modernized and updated to match changes to the Instagram API.
 Changes from the original:
 
 * [x] Removed deprecated API endpoints (which are many)
-* [ ] Added support new media type "carousel"
+* [ ] Added support for new media type "carousel"
 * [ ] Added support for OAuth flow to retrieve access token
 * [x] Added go module
 * [x] Added support for non-default `http.Client`
