@@ -23,22 +23,23 @@ type UserCounts struct {
 
 // Instagram Media object
 type Media struct {
-	Type         string
-	Id           string
-	UsersInPhoto []UserPosition `json:"users_in_photo"`
-	Filter       string
-	Tags         []string
-	Comments     *Comments
-	Caption      *Caption
-	Likes        *Likes
-	Link         string
-	User         *User
-	CreatedTime  StringUnixTime `json:"created_time"`
-	Images       *Images
-	Videos       *Videos
-	Location     *Location
-	UserHasLiked bool `json:"user_has_liked"`
-	Attribution  *Attribution
+	Type           string
+	Id             string
+	UsersInPhoto   []UserPosition `json:"users_in_photo"`
+	Filter         string
+	Tags           []string
+	Comments       *Comments
+	Caption        *Caption
+	Likes          *Likes
+	Link           string
+	User           *User
+	CreatedTime    StringUnixTime `json:"created_time"`
+	Images         *Images
+	Videos         *Videos
+	CarouselMedias []CarouselMedia `json:"carousel_media"`
+	Location       *Location
+	UserHasLiked   bool `json:"user_has_liked"`
+	Attribution    *Attribution
 }
 
 // A pair of user object and position
@@ -79,12 +80,14 @@ type Likes struct {
 }
 
 type Images struct {
-	LowResolution      *Image `json:"low_resolution"`
-	Thumbnail          *Image
-	StandardResolution *Image `json:"standard_resolution"`
+	LowResolution      Image `json:"low_resolution"`
+	LowBandwidth       Image `json:"low_bandwidth"`
+	Thumbnail          Image
+	StandardResolution Image `json:"standard_resolution"`
 }
 
 type Image struct {
+	Id     string
 	Url    string
 	Width  int64
 	Height int64
@@ -93,6 +96,13 @@ type Image struct {
 type Videos struct {
 	LowResolution      *Video `json:"low_resolution"`
 	StandardResolution *Video `json:"standard_resolution"`
+}
+
+type CarouselMedia struct {
+	Type         string
+	Images       *Images
+	Videos       *Images
+	UsersInPhoto []UserPosition `json:"users_in_photo"`
 }
 
 type Video Image
