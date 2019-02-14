@@ -2,6 +2,7 @@
 package instagram
 
 import (
+	"bytes"
 	"context"
 	"crypto/hmac"
 	"crypto/sha256"
@@ -24,8 +25,17 @@ type Api struct {
 	ClientSecret         string
 	AccessToken          string
 	EnforceSignedRequest bool
-	HTTPClient           *http.Client
-	Header               http.Header
+
+	// HTTPClient sets a custom HTTP Client used to make requests.
+	HTTPClient *http.Client
+
+	// KeepRawBody set to true will store the raw API response body
+	// of the last request in RawBody.
+	KeepRawBody bool
+	RawBody     io.Reader
+
+	// Header contains the raw API response header of the last request.
+	Header http.Header
 }
 
 // Create an API with either a ClientId OR an accessToken. Only one is required. Access tokens are preferred because they keep rate limiting down.
@@ -127,17 +137,24 @@ func (api *Api) do(ctx context.Context, req *http.Request, r interface{}) error 
 	api.Header = resp.Header
 
 	if resp.StatusCode != 200 {
-		return apiError(resp)
+		return api.apiError(resp)
 	}
 
-	return decodeResponse(resp.Body, r)
+	return api.decodeResponse(resp.Body, r)
 }
 
-func decodeResponse(body io.Reader, to interface{}) error {
-	// b, _ := ioutil.ReadAll(body)
-	// fmt.Println("Body:",string(b))
-	// err := json.Unmarshal(b, to)
-	err := json.NewDecoder(body).Decode(to)
+func (api *Api) decodeResponse(body io.Reader, to interface{}) error {
+
+	var r io.Reader
+	if api.KeepRawBody {
+		var buf bytes.Buffer
+		r = io.TeeReader(body, &buf)
+		api.RawBody = &buf
+	} else {
+		r = body
+	}
+
+	err := json.NewDecoder(r).Decode(to)
 
 	if err != nil {
 		return fmt.Errorf("instagram: error decoding body; %s", err.Error())
@@ -145,9 +162,9 @@ func decodeResponse(body io.Reader, to interface{}) error {
 	return nil
 }
 
-func apiError(resp *http.Response) error {
+func (api *Api) apiError(resp *http.Response) error {
 	m := new(metaResponse)
-	if err := decodeResponse(resp.Body, m); err != nil {
+	if err := api.decodeResponse(resp.Body, m); err != nil {
 		return err
 	}
 

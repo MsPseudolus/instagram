@@ -1,10 +1,9 @@
-package instagram_test
+package integration_test
 
 import (
 	"context"
 	"errors"
 	"flag"
-	"fmt"
 	"log"
 	"net/url"
 	"os"
@@ -13,19 +12,7 @@ import (
 	"time"
 
 	"github.com/recentralized/instagram"
-)
-
-const (
-	envClientID     = "TEST_INSTAGRAM_CLIENT_ID"
-	envClientSecret = "TEST_INSTAGRAM_CLIENT_SECRET"
-	envAccessToken  = "TEST_INSTAGRAM_ACCESS_TOKEN"
-)
-
-var (
-	clientID     string
-	clientSecret string
-	accessToken  string
-	client       *instagram.Api
+	"github.com/recentralized/instagram/integration"
 )
 
 func TestMain(m *testing.M) {
@@ -36,29 +23,15 @@ func TestMain(m *testing.M) {
 		os.Exit(0)
 	}
 
-	clientID = os.Getenv(envClientID)
-	clientSecret = os.Getenv(envClientSecret)
-	accessToken = os.Getenv(envAccessToken)
-
-	if clientID == "" {
-		fmt.Printf("Missing %s\n", envClientID)
-		os.Exit(1)
-	}
-	if clientSecret == "" {
-		fmt.Printf("Missing %s\n", envClientSecret)
-		os.Exit(1)
-	}
-	if accessToken == "" {
-		fmt.Printf("Missing %s\n", envAccessToken)
-		os.Exit(1)
-	}
+	// Make sure we can initialize the API.
+	newAPI()
 
 	exit := m.Run()
 	os.Exit(exit)
 }
 
 func newAPI() *instagram.Api {
-	return instagram.New(clientID, clientSecret, accessToken, true)
+	return integration.NewAPI()
 }
 
 func TestVerifyCredentials(t *testing.T) {
