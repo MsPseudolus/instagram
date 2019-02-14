@@ -1,1 +1,1 @@
-module github.com/recentralized/golang-instagram
+module github.com/recentralized/instagram

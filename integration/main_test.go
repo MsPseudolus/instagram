@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/recentralized/golang-instagram"
+	"github.com/recentralized/instagram"
 )
 
 const (
