@@ -95,6 +95,70 @@ func TestMediaTypes(t *testing.T) {
 				},
 			},
 		},
+		{
+			desc: "carosel with image and video",
+			fix:  "carousel_mixed",
+			wantMedia: Media{
+				Id:          "1979319391662961209_11073382793",
+				Type:        "carousel",
+				CreatedTime: "1550173280",
+
+				Link:   "https://www.instagram.com/p/Bt39H_1HPI5YVhqU2BTNiI40_wBQerAXmEDoeU0/",
+				Filter: "Normal",
+
+				User: &User{
+					Id:             "11073382793",
+					Username:       "go_ig_test_0219",
+					FullName:       "Golang Client",
+					ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
+				},
+
+				Likes: &Likes{
+					Count: 0,
+				},
+
+				Comments: &Comments{
+					Count: 0,
+				},
+
+				Caption: &Caption{
+					Id:          "18063037396017626",
+					CreatedTime: "1550173280",
+					Text:        "Carousel photo and video #0219test #carouseltest",
+					From: &User{
+						Id:             "11073382793",
+						Username:       "go_ig_test_0219",
+						FullName:       "Golang Client",
+						ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
+					},
+				},
+
+				Tags: []string{
+					"carouseltest",
+					"0219test",
+				},
+
+				UsersInPhoto: []UserPosition{},
+
+				Images: &Images{
+					Thumbnail: &Image{
+						Url:    "https://scontent.cdninstagram.com/vp/82e7dd474a6c6735614f8c306c0be3fb/5CDF80BF/t51.2885-15/e35/c0.0.1079.1079/s150x150/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  150,
+						Height: 150,
+					},
+					LowResolution: &Image{
+						Url:    "https://scontent.cdninstagram.com/vp/261dc6deb2eaa87210ee2675050dcf4c/5CDDEB8F/t51.2885-15/e35/s320x320/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  320,
+						Height: 319,
+					},
+					StandardResolution: &Image{
+						Url:    "https://scontent.cdninstagram.com/vp/df6922bf475acd96ae4b88787fddea0f/5CF61472/t51.2885-15/sh0.08/e35/s640x640/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  640,
+						Height: 639,
+					},
+				},
+			},
+		},
 	}
 
 	for _, tt := range tests {
