@@ -96,6 +96,83 @@ func TestMediaTypes(t *testing.T) {
 			},
 		},
 		{
+			desc: "video media",
+			fix:  "video",
+			wantMedia: Media{
+				Id:          "1979318157757411422_11073382793",
+				Type:        "video",
+				CreatedTime: "1550173160",
+
+				Link:   "https://www.instagram.com/p/Bt382CqnHBe-UvbBQ78RvFycVFM2JDGVrd5Xfs0/",
+				Filter: "Normal",
+
+				User: User{
+					Id:             "11073382793",
+					Username:       "go_ig_test_0219",
+					FullName:       "Golang Client",
+					ProfilePicture: "https://scontent-arn2-1.cdninstagram.com/vp/10dc8a532f753c991ce068347dfc0767/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com",
+				},
+
+				Caption: Caption{
+					Id:          "17878115845306299",
+					CreatedTime: "1550173160",
+					Text:        "Video post #0219test #videotesr",
+					From: User{
+						Id:             "11073382793",
+						Username:       "go_ig_test_0219",
+						FullName:       "Golang Client",
+						ProfilePicture: "https://scontent-arn2-1.cdninstagram.com/vp/10dc8a532f753c991ce068347dfc0767/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com",
+					},
+				},
+
+				Tags: []string{
+					"0219test",
+					"videotesr",
+				},
+
+				UsersInPhoto: []UserPosition{},
+
+				Images: Images{
+					Thumbnail: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/5fe061d53fd0607be846f3c5409f603a/5C683C08/t51.2885-15/e15/s150x150/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  150,
+						Height: 150,
+					},
+					LowResolution: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/6b86ebfdd4d9055e95cb392e4bba6b27/5C681EF0/t51.2885-15/e15/s320x320/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  320,
+						Height: 320,
+					},
+					StandardResolution: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/3780985d3fe523a7189a8b5d26d91b82/5C68240B/t51.2885-15/e15/s640x640/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
+						Width:  640,
+						Height: 640,
+					},
+				},
+
+				Videos: Images{
+					LowResolution: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
+						Id:     "17848556476361628",
+						Width:  480,
+						Height: 480,
+					},
+					LowBandwidth: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
+						Id:     "17848556476361628",
+						Width:  480,
+						Height: 480,
+					},
+					StandardResolution: Image{
+						Url:    "https://scontent.cdninstagram.com/vp/fa26e894e4be773c121d92f4b1958c0b/5C6811FE/t50.2886-16/52696644_485271351879016_7856051086296088576_n.mp4?_nc_ht=scontent.cdninstagram.com",
+						Id:     "17995277092175876",
+						Width:  640,
+						Height: 640,
+					},
+				},
+			},
+		},
+		{
 			desc: "carosel with image and video",
 			fix:  "carousel_mixed",
 			wantMedia: Media{

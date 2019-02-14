@@ -35,7 +35,7 @@ type Media struct {
 	User           User
 	CreatedTime    StringUnixTime `json:"created_time"`
 	Images         Images
-	Videos         *Videos
+	Videos         Images
 	CarouselMedias []CarouselMedia `json:"carousel_media"`
 	Location       Location
 	UserHasLiked   bool `json:"user_has_liked"`
@@ -93,19 +93,12 @@ type Image struct {
 	Height int64
 }
 
-type Videos struct {
-	LowResolution      Video `json:"low_resolution"`
-	StandardResolution Video `json:"standard_resolution"`
-}
-
 type CarouselMedia struct {
 	Type         string
 	Images       Images
 	Videos       Images
 	UsersInPhoto []UserPosition `json:"users_in_photo"`
 }
-
-type Video Image
 
 type Location struct {
 	Id        LocationId
