@@ -32,11 +32,6 @@ type CommentsResponse struct {
 type Pagination struct {
 	NextUrl   string `json:"next_url"`
 	NextMaxId string `json:"next_max_id"`
-
-	// Used only on GetTagRecentMedia()
-	NextMaxTagId string `json:"next_max_tag_id"`
-	// Used only on GetTagRecentMedia()
-	MinTagId string `json:"min_tag_id"`
 }
 
 // Meta is the response information.

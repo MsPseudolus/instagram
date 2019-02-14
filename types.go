@@ -107,11 +107,6 @@ type Location struct {
 	Longitude float64
 }
 
-type Relationship struct {
-	IncomingStatus string `json:"incoming_status"`
-	OutgoingStatus string `json:"outgoing_status"`
-}
-
 // If another app uploaded the media, then this is the place it is given. As of 11/2013, Hipstamic is the only allowed app
 type Attribution struct {
 	Website   string
