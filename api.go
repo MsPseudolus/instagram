@@ -146,7 +146,7 @@ func decodeResponse(body io.Reader, to interface{}) error {
 }
 
 func apiError(resp *http.Response) error {
-	m := new(MetaResponse)
+	m := new(metaResponse)
 	if err := decodeResponse(resp.Body, m); err != nil {
 		return err
 	}

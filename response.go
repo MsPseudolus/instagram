@@ -1,69 +1,34 @@
 package instagram
 
-type UserResponse struct {
-	MetaResponse
-	User *User `json:"data"`
-}
-
-type UsersResponse struct {
-	MetaResponse
-	Users []User `json:"data"`
-}
-
-type PaginatedUsersResponse struct {
-	UsersResponse
-	Pagination *UserPagination
-}
-
-type MediaResponse struct {
-	MetaResponse
-	Media *Media `json:"data"`
-}
-
-type MediasResponse struct {
-	MetaResponse
-	Medias []Media `json:"data"`
-}
-
-type PaginatedMediasResponse struct {
-	MediasResponse
-	Pagination *MediaPagination
-}
-
-type CommentsResponse struct {
-	MetaResponse
-	Comments []Comment `json:"data"`
-}
-
-type TagResponse struct {
-	MetaResponse
-	Tag *Tag `json:"data"`
-}
-
-type TagsResponse struct {
-	MetaResponse
-	Tags []Tag `json:"data"`
-}
-
-type LocationResponse struct {
-	MetaResponse
-	Location *Location `json:"data"`
-}
-
-type LocationsResponse struct {
-	MetaResponse
-	Locations []Location `json:"data"`
-}
-
-type RelationshipResponse struct {
-	MetaResponse
-	Relationship *Relationship `json:"data"`
-}
-
-type MetaResponse struct {
+type metaResponse struct {
 	Meta *Meta
 }
 
+// UserResponse is the API response for GetSelf()
+type UserResponse struct {
+	metaResponse
+	User *User `json:"data"`
+}
+
+// PaginatedMediasResponse is the API response for GetRecentMedia()
+type PaginatedMediasResponse struct {
+	metaResponse
+	Medias     []Media `json:"data"`
+	Pagination *MediaPagination
+}
+
+// MediaPagination will give you an easy way to request the next page of media.
+type MediaPagination struct {
+	*Pagination
+}
+
+// CommentsResponse is the API response for GetMediaRecentComments()
+type CommentsResponse struct {
+	metaResponse
+	Comments []Comment `json:"data"`
+}
+
+// Pagination describes how to get the next page of results.
 type Pagination struct {
 	NextUrl   string `json:"next_url"`
 	NextMaxId string `json:"next_max_id"`
@@ -74,18 +39,9 @@ type Pagination struct {
 	MinTagId string `json:"min_tag_id"`
 }
 
+// Meta is the response information.
 type Meta struct {
 	Code         int
 	ErrorType    string `json:"error_type"`
 	ErrorMessage string `json:"error_message"`
-}
-
-// MediaPagination will give you an easy way to request the next page of media.
-type MediaPagination struct {
-	*Pagination
-}
-
-// UserPagination will give you an easy way to request the next page of media.
-type UserPagination struct {
-	*Pagination
 }
