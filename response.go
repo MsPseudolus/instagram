@@ -14,12 +14,12 @@ type UserResponse struct {
 type PaginatedMediasResponse struct {
 	metaResponse
 	Medias     []Media `json:"data"`
-	Pagination *MediaPagination
+	Pagination MediaPagination
 }
 
 // MediaPagination will give you an easy way to request the next page of media.
 type MediaPagination struct {
-	*Pagination
+	Pagination
 }
 
 // CommentsResponse is the API response for GetMediaRecentComments()
