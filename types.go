@@ -5,7 +5,7 @@ import "time"
 // User is the instagram user. This struct is used in several contexts, each of
 // which may populate different data.
 type User struct {
-	Id             string      `json:"id,omitempty"`
+	ID             string      `json:"id,omitempty"`
 	Username       string      `json:"username,omitempty"`
 	FirstName      string      `json:"first_name,omitempty"`
 	LastName       string      `json:"last_name,omitempty"`
@@ -26,7 +26,7 @@ type UserCounts struct {
 // Media is the overall wrapper for any kind of Instagram media.
 type Media struct {
 	Type           string          `json:"type"`
-	Id             string          `json:"id"`
+	ID             string          `json:"id"`
 	UsersInPhoto   []UserPosition  `json:"users_in_photo"`
 	Filter         string          `json:"filter"`
 	Tags           []string        `json:"tags"`
@@ -63,7 +63,7 @@ type Comments struct {
 
 // Comment is a comment on a media.
 type Comment struct {
-	Id          string    `json:"id"`
+	ID          string    `json:"id"`
 	Text        string    `json:"text"`
 	From        User      `json:"from"`
 	CreatedTime time.Time `json:"created_time"`
@@ -84,7 +84,7 @@ type MediaVariants struct {
 
 // MediaVariant is a specific variant of the media.
 type MediaVariant struct {
-	Id     string `json:"id,omitempty"`
+	ID     string `json:"id,omitempty"`
 	Url    string `json:"url"`
 	Width  int64  `json:"width"`
 	Height int64  `json:"height"`
@@ -100,7 +100,7 @@ type CarouselMedia struct {
 
 // Location is the location of a media.
 type Location struct {
-	Id        string  `json:"id,omitempty"`
+	ID        string  `json:"id,omitempty"`
 	Name      string  `json:"name,omitempty"`
 	Latitude  float64 `json:"latitude,omitempty"`
 	Longitude float64 `json:"longitude,omitempty"`

@@ -124,8 +124,8 @@ func TestGetRecentMediaIterate(t *testing.T) {
 		if count >= max {
 			cancel()
 		}
-		if m.Id == "" {
-			t.Errorf("Id is empty: %v", m)
+		if m.ID == "" {
+			t.Errorf("ID is empty: %v", m)
 		}
 	}
 	for err := range errc {
@@ -172,8 +172,7 @@ func findMediaWithComments() (string, error) {
 	}
 	for _, m := range res.Medias {
 		if m.Comments.Count > 0 {
-			log.Printf("M C %d", m.Comments.Count)
-			return m.Id, nil
+			return m.ID, nil
 		}
 	}
 	return "", errors.New("No media with comments")

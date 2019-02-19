@@ -73,7 +73,7 @@ type locationJSONWrapper struct {
 // MarshalJSON implements JSON.
 func (l Location) MarshalJSON() ([]byte, error) {
 	ll := LocationJSON(l)
-	lj := locationJSONWrapper{l.Id, &ll}
+	lj := locationJSONWrapper{l.ID, &ll}
 	return json.Marshal(lj)
 }
 
@@ -91,9 +91,9 @@ func (l *Location) UnmarshalJSON(in []byte) error {
 	case nil:
 		// ok
 	case string:
-		l.Id = v
+		l.ID = v
 	case float64:
-		l.Id = fmt.Sprintf("%0.f", v)
+		l.ID = fmt.Sprintf("%0.f", v)
 	default:
 		return fmt.Errorf("unknown type for location id: %T", lj.ID)
 	}

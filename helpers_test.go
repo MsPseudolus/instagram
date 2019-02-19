@@ -24,7 +24,7 @@ func TestMediaJSON(t *testing.T) {
 			desc: "round trip",
 			json: `{"type":"","id":"123","users_in_photo":null,"filter":"","tags":null,"comments":{"count":0},"caption":{"id":"","text":"","from":{},"created_time":null},"likes":{"count":0},"link":"","user":{},"images":{},"videos":{},"carousel_media":null,"location":{"id":""},"user_has_liked":false,"created_time":"1550173420"}`,
 			media: Media{
-				Id:          "123",
+				ID:          "123",
 				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 			},
 		},
@@ -72,7 +72,7 @@ func TestCommentJSON(t *testing.T) {
 			desc: "round trip",
 			json: `{"id":"123","text":"","from":{},"created_time":"1550173420"}`,
 			comment: Comment{
-				Id:          "123",
+				ID:          "123",
 				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 			},
 		},
@@ -122,7 +122,7 @@ func TestLocationJSON(t *testing.T) {
 			desc: "round trip with string",
 			json: `{"id":"123","name":"florida"}`,
 			location: Location{
-				Id:   "123",
+				ID:   "123",
 				Name: "florida",
 			},
 		},
@@ -130,7 +130,7 @@ func TestLocationJSON(t *testing.T) {
 			desc: "round trip with number",
 			json: `{"id":123,"name":"florida"}`,
 			location: Location{
-				Id:   "123",
+				ID:   "123",
 				Name: "florida",
 			},
 			unmarshalOnly: true,

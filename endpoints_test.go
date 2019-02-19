@@ -20,7 +20,7 @@ func TestMediaTypes(t *testing.T) {
 			desc: "image media",
 			fix:  "image",
 			wantMedia: Media{
-				Id:          "1979320569926821011_11073382793",
+				ID:          "1979320569926821011_11073382793",
 				Type:        "image",
 				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 
@@ -28,7 +28,7 @@ func TestMediaTypes(t *testing.T) {
 				Filter: "Crema",
 
 				User: User{
-					Id:             "11073382793",
+					ID:             "11073382793",
 					Username:       "go_ig_test_0219",
 					FullName:       "Golang Client",
 					ProfilePicture: "https://scontent-sjc3-1.cdninstagram.com/vp/504ac2fa79adb1d412b31cab19be8d36/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-sjc3-1.cdninstagram.com",
@@ -43,11 +43,11 @@ func TestMediaTypes(t *testing.T) {
 				},
 
 				Caption: Comment{
-					Id:          "18002756710177046",
+					ID:          "18002756710177046",
 					CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 					Text:        "Photo post #0219test",
 					From: User{
-						Id:             "11073382793",
+						ID:             "11073382793",
 						Username:       "go_ig_test_0219",
 						FullName:       "Golang Client",
 						ProfilePicture: "https://scontent-sjc3-1.cdninstagram.com/vp/504ac2fa79adb1d412b31cab19be8d36/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-sjc3-1.cdninstagram.com",
@@ -71,7 +71,7 @@ func TestMediaTypes(t *testing.T) {
 				},
 
 				Location: Location{
-					Id:        "213051194",
+					ID:        "213051194",
 					Name:      "Oakland, California",
 					Latitude:  37.8029,
 					Longitude: -122.2721,
@@ -100,7 +100,7 @@ func TestMediaTypes(t *testing.T) {
 			desc: "video media",
 			fix:  "video",
 			wantMedia: Media{
-				Id:          "1979318157757411422_11073382793",
+				ID:          "1979318157757411422_11073382793",
 				Type:        "video",
 				CreatedTime: time.Date(2019, 2, 14, 19, 39, 20, 0, time.UTC),
 
@@ -108,18 +108,18 @@ func TestMediaTypes(t *testing.T) {
 				Filter: "Normal",
 
 				User: User{
-					Id:             "11073382793",
+					ID:             "11073382793",
 					Username:       "go_ig_test_0219",
 					FullName:       "Golang Client",
 					ProfilePicture: "https://scontent-arn2-1.cdninstagram.com/vp/10dc8a532f753c991ce068347dfc0767/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com",
 				},
 
 				Caption: Comment{
-					Id:          "17878115845306299",
+					ID:          "17878115845306299",
 					CreatedTime: time.Date(2019, 2, 14, 19, 39, 20, 0, time.UTC),
 					Text:        "Video post #0219test #videotesr",
 					From: User{
-						Id:             "11073382793",
+						ID:             "11073382793",
 						Username:       "go_ig_test_0219",
 						FullName:       "Golang Client",
 						ProfilePicture: "https://scontent-arn2-1.cdninstagram.com/vp/10dc8a532f753c991ce068347dfc0767/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com",
@@ -154,19 +154,19 @@ func TestMediaTypes(t *testing.T) {
 				Videos: MediaVariants{
 					LowResolution: &MediaVariant{
 						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
-						Id:     "17848556476361628",
+						ID:     "17848556476361628",
 						Width:  480,
 						Height: 480,
 					},
 					LowBandwidth: &MediaVariant{
 						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
-						Id:     "17848556476361628",
+						ID:     "17848556476361628",
 						Width:  480,
 						Height: 480,
 					},
 					StandardResolution: &MediaVariant{
 						Url:    "https://scontent.cdninstagram.com/vp/fa26e894e4be773c121d92f4b1958c0b/5C6811FE/t50.2886-16/52696644_485271351879016_7856051086296088576_n.mp4?_nc_ht=scontent.cdninstagram.com",
-						Id:     "17995277092175876",
+						ID:     "17995277092175876",
 						Width:  640,
 						Height: 640,
 					},
@@ -177,7 +177,7 @@ func TestMediaTypes(t *testing.T) {
 			desc: "carosel with image and video",
 			fix:  "carousel_mixed",
 			wantMedia: Media{
-				Id:          "1979319391662961209_11073382793",
+				ID:          "1979319391662961209_11073382793",
 				Type:        "carousel",
 				CreatedTime: time.Date(2019, 2, 14, 19, 41, 20, 0, time.UTC),
 
@@ -185,18 +185,18 @@ func TestMediaTypes(t *testing.T) {
 				Filter: "Normal",
 
 				User: User{
-					Id:             "11073382793",
+					ID:             "11073382793",
 					Username:       "go_ig_test_0219",
 					FullName:       "Golang Client",
 					ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
 				},
 
 				Caption: Comment{
-					Id:          "18063037396017626",
+					ID:          "18063037396017626",
 					CreatedTime: time.Date(2019, 2, 14, 19, 41, 20, 0, time.UTC),
 					Text:        "Carousel photo and video #0219test #carouseltest",
 					From: User{
-						Id:             "11073382793",
+						ID:             "11073382793",
 						Username:       "go_ig_test_0219",
 						FullName:       "Golang Client",
 						ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
@@ -254,19 +254,19 @@ func TestMediaTypes(t *testing.T) {
 						Type: "video",
 						Videos: MediaVariants{
 							LowResolution: &MediaVariant{
-								Id:     "17973623890206697",
+								ID:     "17973623890206697",
 								Url:    "https://scontent.cdninstagram.com/vp/289d214085a1d17234b1138781c0563b/5C685779/t50.2886-16/52133795_250694959199695_5368374984429273088_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  480,
 								Height: 480,
 							},
 							LowBandwidth: &MediaVariant{
-								Id:     "17973623890206697",
+								ID:     "17973623890206697",
 								Url:    "https://scontent.cdninstagram.com/vp/289d214085a1d17234b1138781c0563b/5C685779/t50.2886-16/52133795_250694959199695_5368374984429273088_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  480,
 								Height: 480,
 							},
 							StandardResolution: &MediaVariant{
-								Id:     "17866771429321861",
+								ID:     "17866771429321861",
 								Url:    "https://scontent.cdninstagram.com/vp/eead42a01be475b39c8099a066db344d/5C682502/t50.2886-16/52613010_405348530239650_6898777355045568512_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  640,
 								Height: 640,
