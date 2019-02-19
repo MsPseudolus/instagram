@@ -31,7 +31,7 @@ type Media struct {
 	Filter         string
 	Tags           []string
 	Comments       Comments
-	Caption        Caption
+	Caption        Comment
 	Likes          Likes
 	Link           string
 	User           User
@@ -68,13 +68,11 @@ type Comments struct {
 }
 
 type Comment struct {
-	CreatedTime StringUnixTime `json:"created_time"`
+	CreatedTime time.Time `json:"created_time"`
 	Text        string
 	From        User
 	Id          string
 }
-
-type Caption Comment
 
 type Likes struct {
 	Count int64

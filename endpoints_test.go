@@ -42,9 +42,9 @@ func TestMediaTypes(t *testing.T) {
 					Count: 2,
 				},
 
-				Caption: Caption{
+				Caption: Comment{
 					Id:          "18002756710177046",
-					CreatedTime: "1550173420",
+					CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 					Text:        "Photo post #0219test",
 					From: User{
 						Id:             "11073382793",
@@ -114,9 +114,9 @@ func TestMediaTypes(t *testing.T) {
 					ProfilePicture: "https://scontent-arn2-1.cdninstagram.com/vp/10dc8a532f753c991ce068347dfc0767/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com",
 				},
 
-				Caption: Caption{
+				Caption: Comment{
 					Id:          "17878115845306299",
-					CreatedTime: "1550173160",
+					CreatedTime: time.Date(2019, 2, 14, 19, 39, 20, 0, time.UTC),
 					Text:        "Video post #0219test #videotesr",
 					From: User{
 						Id:             "11073382793",
@@ -191,9 +191,9 @@ func TestMediaTypes(t *testing.T) {
 					ProfilePicture: "https://scontent-mia3-2.cdninstagram.com/vp/f7cc70d344dbbf503819a12b6da4800e/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-mia3-2.cdninstagram.com",
 				},
 
-				Caption: Caption{
+				Caption: Comment{
 					Id:          "18063037396017626",
-					CreatedTime: "1550173280",
+					CreatedTime: time.Date(2019, 2, 14, 19, 41, 20, 0, time.UTC),
 					Text:        "Carousel photo and video #0219test #carouseltest",
 					From: User{
 						Id:             "11073382793",

@@ -32,6 +32,32 @@ func (m *Media) UnmarshalJSON(in []byte) error {
 	return nil
 }
 
+// CommentJSON is Comment for JSON.
+type CommentJSON Comment
+
+type commentJSONWrapper struct {
+	*CommentJSON
+	CreatedTime stringTime `json:"created_time"`
+}
+
+// MarshalJSON implements JSON.
+func (c Comment) MarshalJSON() ([]byte, error) {
+	cc := CommentJSON(c)
+	cj := commentJSONWrapper{&cc, stringTime(c.CreatedTime)}
+	return json.Marshal(cj)
+}
+
+// UnmarshalJSON implements JSON.
+func (c *Comment) UnmarshalJSON(in []byte) error {
+	cj := commentJSONWrapper{}
+	if err := json.Unmarshal(in, &cj); err != nil {
+		return err
+	}
+	*c = Comment(*cj.CommentJSON)
+	c.CreatedTime = time.Time(cj.CreatedTime)
+	return nil
+}
+
 type stringTime time.Time
 
 func (s stringTime) MarshalJSON() ([]byte, error) {
