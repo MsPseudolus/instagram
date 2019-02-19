@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/kr/pretty"
 )
@@ -21,7 +22,7 @@ func TestMediaTypes(t *testing.T) {
 			wantMedia: Media{
 				Id:          "1979320569926821011_11073382793",
 				Type:        "image",
-				CreatedTime: "1550173420",
+				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
 
 				Link:   "https://www.instagram.com/p/Bt39ZJLHKSTFwXShw402xx8W9loUPHTyH5BsqY0/",
 				Filter: "Crema",
@@ -101,7 +102,7 @@ func TestMediaTypes(t *testing.T) {
 			wantMedia: Media{
 				Id:          "1979318157757411422_11073382793",
 				Type:        "video",
-				CreatedTime: "1550173160",
+				CreatedTime: time.Date(2019, 2, 14, 19, 39, 20, 0, time.UTC),
 
 				Link:   "https://www.instagram.com/p/Bt382CqnHBe-UvbBQ78RvFycVFM2JDGVrd5Xfs0/",
 				Filter: "Normal",
@@ -178,7 +179,7 @@ func TestMediaTypes(t *testing.T) {
 			wantMedia: Media{
 				Id:          "1979319391662961209_11073382793",
 				Type:        "carousel",
-				CreatedTime: "1550173280",
+				CreatedTime: time.Date(2019, 2, 14, 19, 41, 20, 0, time.UTC),
 
 				Link:   "https://www.instagram.com/p/Bt39H_1HPI5YVhqU2BTNiI40_wBQerAXmEDoeU0/",
 				Filter: "Normal",

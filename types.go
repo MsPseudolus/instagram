@@ -1,5 +1,7 @@
 package instagram
 
+import "time"
+
 // Instagram User Object. Note that user objects are not always fully returned.
 // Be sure to see the descriptions on the instagram documentation for any given endpoint.
 type User struct {
@@ -33,7 +35,7 @@ type Media struct {
 	Likes          Likes
 	Link           string
 	User           User
-	CreatedTime    StringUnixTime `json:"created_time"`
+	CreatedTime    time.Time `json:"created_time"`
 	Images         Images
 	Videos         Images
 	CarouselMedias []CarouselMedia `json:"carousel_media"`
