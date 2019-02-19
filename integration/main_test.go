@@ -80,7 +80,7 @@ func TestGetRecentMedia(t *testing.T) {
 
 	media := res.Medias[0]
 
-	if media.CreatedTime == "" {
+	if media.CreatedTime.IsZero() {
 		t.Errorf("CreatedTime is empty")
 	}
 }

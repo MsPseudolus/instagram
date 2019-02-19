@@ -53,8 +53,10 @@ func (c *Comment) UnmarshalJSON(in []byte) error {
 	if err := json.Unmarshal(in, &cj); err != nil {
 		return err
 	}
-	*c = Comment(*cj.CommentJSON)
-	c.CreatedTime = time.Time(cj.CreatedTime)
+	if cj.CommentJSON != nil {
+		*c = Comment(*cj.CommentJSON)
+		c.CreatedTime = time.Time(cj.CreatedTime)
+	}
 	return nil
 }
 

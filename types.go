@@ -5,43 +5,43 @@ import "time"
 // Instagram User Object. Note that user objects are not always fully returned.
 // Be sure to see the descriptions on the instagram documentation for any given endpoint.
 type User struct {
-	Id             string `json:"id"`
-	Username       string `json:"username"`
-	FirstName      string `json:"first_name"`
-	LastName       string `json:"last_name"`
-	FullName       string `json:"full_name"`
-	ProfilePicture string `json:"profile_picture"`
-	Bio            string
-	Website        string
-	Counts         *UserCounts
+	Id             string      `json:"id"`
+	Username       string      `json:"username"`
+	FirstName      string      `json:"first_name"`
+	LastName       string      `json:"last_name"`
+	FullName       string      `json:"full_name"`
+	ProfilePicture string      `json:"profile_picture"`
+	Bio            string      `json:"bio"`
+	Website        string      `json:"website"`
+	Counts         *UserCounts `json:"counts,omitempty"`
 }
 
 // Instagram User Counts object. Returned on User objects
 type UserCounts struct {
-	Media      int64
-	Follows    int64
+	Media      int64 `json:"media"`
+	Follows    int64 `json:"follows"`
 	FollowedBy int64 `json:"followed_by"`
 }
 
 // Instagram Media object
 type Media struct {
-	Type           string
-	Id             string
-	UsersInPhoto   []UserPosition `json:"users_in_photo"`
-	Filter         string
-	Tags           []string
-	Comments       Comments
-	Caption        Comment
-	Likes          Likes
-	Link           string
-	User           User
-	CreatedTime    time.Time `json:"created_time"`
-	Images         Images
-	Videos         Images
+	Type           string          `json:"type"`
+	Id             string          `json:"id"`
+	UsersInPhoto   []UserPosition  `json:"users_in_photo"`
+	Filter         string          `json:"filter"`
+	Tags           []string        `json:"tags"`
+	Comments       Comments        `json:"comments"`
+	Caption        Comment         `json:"caption"`
+	Likes          Likes           `json:"likes"`
+	Link           string          `json:"link"`
+	User           User            `json:"user"`
+	CreatedTime    time.Time       `json:"created_time"`
+	Images         Images          `json:"images"`
+	Videos         Images          `json:"videos"`
 	CarouselMedias []CarouselMedia `json:"carousel_media"`
-	Location       Location
-	UserHasLiked   bool `json:"user_has_liked"`
-	Attribution    *Attribution
+	Location       Location        `json:"location"`
+	UserHasLiked   bool            `json:"user_has_liked"`
+	Attribution    *Attribution    `json:"attribution,omitempty"`
 }
 
 // A pair of user object and position
@@ -63,26 +63,26 @@ type Tag struct {
 }
 
 type Comments struct {
-	Count int64
-	Data  []Comment
+	Count int64     `json:"count"`
+	Data  []Comment `json:"data,omitempty"`
 }
 
 type Comment struct {
+	Id          string    `json:"id"`
+	Text        string    `json:"text"`
+	From        User      `json:"from"`
 	CreatedTime time.Time `json:"created_time"`
-	Text        string
-	From        User
-	Id          string
 }
 
 type Likes struct {
-	Count int64
-	Data  []User
+	Count int64  `json:"likes"`
+	Data  []User `json:"data,omitempty"`
 }
 
 type Images struct {
 	LowResolution      Image `json:"low_resolution"`
 	LowBandwidth       Image `json:"low_bandwidth"`
-	Thumbnail          Image
+	Thumbnail          Image `json:"thumbnail"`
 	StandardResolution Image `json:"standard_resolution"`
 }
 
@@ -101,7 +101,7 @@ type CarouselMedia struct {
 }
 
 type Location struct {
-	Id        LocationId
+	Id        string
 	Name      string
 	Latitude  float64
 	Longitude float64
