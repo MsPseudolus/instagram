@@ -78,17 +78,17 @@ func TestMediaTypes(t *testing.T) {
 				},
 
 				Images: Images{
-					Thumbnail: Image{
+					Thumbnail: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/fd0f484647ad37dc3caf0a2cdf37ca16/5CE59582/t51.2885-15/e35/c0.135.1080.1080/s150x150/50552544_116846169429307_872782777322498633_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  150,
 						Height: 150,
 					},
-					LowResolution: Image{
+					LowResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/0eda6589295b6fa43fd5cf2731afd691/5CF9331A/t51.2885-15/e35/p320x320/50552544_116846169429307_872782777322498633_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  320,
 						Height: 400,
 					},
-					StandardResolution: Image{
+					StandardResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/bd6167c8e4469e16f2f6c900a62c51b9/5CF7EFF6/t51.2885-15/sh0.08/e35/p640x640/50552544_116846169429307_872782777322498633_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  640,
 						Height: 800,
@@ -134,17 +134,17 @@ func TestMediaTypes(t *testing.T) {
 				UsersInPhoto: []UserPosition{},
 
 				Images: Images{
-					Thumbnail: Image{
+					Thumbnail: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/5fe061d53fd0607be846f3c5409f603a/5C683C08/t51.2885-15/e15/s150x150/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  150,
 						Height: 150,
 					},
-					LowResolution: Image{
+					LowResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/6b86ebfdd4d9055e95cb392e4bba6b27/5C681EF0/t51.2885-15/e15/s320x320/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  320,
 						Height: 320,
 					},
-					StandardResolution: Image{
+					StandardResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/3780985d3fe523a7189a8b5d26d91b82/5C68240B/t51.2885-15/e15/s640x640/50863106_2133926990002507_2324727490466410627_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  640,
 						Height: 640,
@@ -152,19 +152,19 @@ func TestMediaTypes(t *testing.T) {
 				},
 
 				Videos: Images{
-					LowResolution: Image{
+					LowResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
 						Id:     "17848556476361628",
 						Width:  480,
 						Height: 480,
 					},
-					LowBandwidth: Image{
+					LowBandwidth: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/c56a21cc014e65e9e22fab2f0f25d60e/5C6890AD/t50.2886-16/52831800_292210298079609_3680295379305234432_n.mp4?_nc_ht=scontent.cdninstagram.com",
 						Id:     "17848556476361628",
 						Width:  480,
 						Height: 480,
 					},
-					StandardResolution: Image{
+					StandardResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/fa26e894e4be773c121d92f4b1958c0b/5C6811FE/t50.2886-16/52696644_485271351879016_7856051086296088576_n.mp4?_nc_ht=scontent.cdninstagram.com",
 						Id:     "17995277092175876",
 						Width:  640,
@@ -211,17 +211,17 @@ func TestMediaTypes(t *testing.T) {
 				UsersInPhoto: []UserPosition{},
 
 				Images: Images{
-					Thumbnail: Image{
+					Thumbnail: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/82e7dd474a6c6735614f8c306c0be3fb/5CDF80BF/t51.2885-15/e35/c0.0.1079.1079/s150x150/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  150,
 						Height: 150,
 					},
-					LowResolution: Image{
+					LowResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/261dc6deb2eaa87210ee2675050dcf4c/5CDDEB8F/t51.2885-15/e35/s320x320/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  320,
 						Height: 319,
 					},
-					StandardResolution: Image{
+					StandardResolution: &Image{
 						Url:    "https://scontent.cdninstagram.com/vp/df6922bf475acd96ae4b88787fddea0f/5CF61472/t51.2885-15/sh0.08/e35/s640x640/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 						Width:  640,
 						Height: 639,
@@ -232,17 +232,17 @@ func TestMediaTypes(t *testing.T) {
 					{
 						Type: "image",
 						Images: Images{
-							Thumbnail: Image{
+							Thumbnail: &Image{
 								Url:    "https://scontent.cdninstagram.com/vp/82e7dd474a6c6735614f8c306c0be3fb/5CDF80BF/t51.2885-15/e35/c0.0.1079.1079/s150x150/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 								Width:  150,
 								Height: 150,
 							},
-							LowResolution: Image{
+							LowResolution: &Image{
 								Url:    "https://scontent.cdninstagram.com/vp/261dc6deb2eaa87210ee2675050dcf4c/5CDDEB8F/t51.2885-15/e35/s320x320/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 								Width:  320,
 								Height: 319,
 							},
-							StandardResolution: Image{
+							StandardResolution: &Image{
 								Url:    "https://scontent.cdninstagram.com/vp/df6922bf475acd96ae4b88787fddea0f/5CF61472/t51.2885-15/sh0.08/e35/s640x640/51287969_2359910680962588_7283258652285168337_n.jpg?_nc_ht=scontent.cdninstagram.com",
 								Width:  640,
 								Height: 639,
@@ -253,19 +253,19 @@ func TestMediaTypes(t *testing.T) {
 					{
 						Type: "video",
 						Videos: Images{
-							LowResolution: Image{
+							LowResolution: &Image{
 								Id:     "17973623890206697",
 								Url:    "https://scontent.cdninstagram.com/vp/289d214085a1d17234b1138781c0563b/5C685779/t50.2886-16/52133795_250694959199695_5368374984429273088_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  480,
 								Height: 480,
 							},
-							LowBandwidth: Image{
+							LowBandwidth: &Image{
 								Id:     "17973623890206697",
 								Url:    "https://scontent.cdninstagram.com/vp/289d214085a1d17234b1138781c0563b/5C685779/t50.2886-16/52133795_250694959199695_5368374984429273088_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  480,
 								Height: 480,
 							},
-							StandardResolution: Image{
+							StandardResolution: &Image{
 								Id:     "17866771429321861",
 								Url:    "https://scontent.cdninstagram.com/vp/eead42a01be475b39c8099a066db344d/5C682502/t50.2886-16/52613010_405348530239650_6898777355045568512_n.mp4?_nc_ht=scontent.cdninstagram.com",
 								Width:  640,

@@ -17,12 +17,12 @@ func TestMediaJSON(t *testing.T) {
 	}{
 		{
 			desc:  "zero value",
-			json:  `{"type":"","id":"","users_in_photo":null,"filter":"","tags":null,"comments":{"count":0},"caption":{"id":"","text":"","from":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"created_time":null},"likes":{"count":0},"link":"","user":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"images":{"low_resolution":{"Id":"","Url":"","Width":0,"Height":0},"low_bandwidth":{"Id":"","Url":"","Width":0,"Height":0},"thumbnail":{"Id":"","Url":"","Width":0,"Height":0},"standard_resolution":{"Id":"","Url":"","Width":0,"Height":0}},"videos":{"low_resolution":{"Id":"","Url":"","Width":0,"Height":0},"low_bandwidth":{"Id":"","Url":"","Width":0,"Height":0},"thumbnail":{"Id":"","Url":"","Width":0,"Height":0},"standard_resolution":{"Id":"","Url":"","Width":0,"Height":0}},"carousel_media":null,"location":{"id":"","name":"","latitude":0,"longitude":0},"user_has_liked":false,"created_time":null}`,
+			json:  `{"type":"","id":"","users_in_photo":null,"filter":"","tags":null,"comments":{"count":0},"caption":{"id":"","text":"","from":{},"created_time":null},"likes":{"count":0},"link":"","user":{},"images":{},"videos":{},"carousel_media":null,"location":{"id":""},"user_has_liked":false,"created_time":null}`,
 			media: Media{},
 		},
 		{
 			desc: "round trip",
-			json: `{"type":"","id":"123","users_in_photo":null,"filter":"","tags":null,"comments":{"count":0},"caption":{"id":"","text":"","from":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"created_time":null},"likes":{"count":0},"link":"","user":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"images":{"low_resolution":{"Id":"","Url":"","Width":0,"Height":0},"low_bandwidth":{"Id":"","Url":"","Width":0,"Height":0},"thumbnail":{"Id":"","Url":"","Width":0,"Height":0},"standard_resolution":{"Id":"","Url":"","Width":0,"Height":0}},"videos":{"low_resolution":{"Id":"","Url":"","Width":0,"Height":0},"low_bandwidth":{"Id":"","Url":"","Width":0,"Height":0},"thumbnail":{"Id":"","Url":"","Width":0,"Height":0},"standard_resolution":{"Id":"","Url":"","Width":0,"Height":0}},"carousel_media":null,"location":{"id":"","name":"","latitude":0,"longitude":0},"user_has_liked":false,"created_time":"1550173420"}`,
+			json: `{"type":"","id":"123","users_in_photo":null,"filter":"","tags":null,"comments":{"count":0},"caption":{"id":"","text":"","from":{},"created_time":null},"likes":{"count":0},"link":"","user":{},"images":{},"videos":{},"carousel_media":null,"location":{"id":""},"user_has_liked":false,"created_time":"1550173420"}`,
 			media: Media{
 				Id:          "123",
 				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
@@ -59,7 +59,7 @@ func TestCommentJSON(t *testing.T) {
 	}{
 		{
 			desc:    "zero value",
-			json:    `{"id":"","text":"","from":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"created_time":null}`,
+			json:    `{"id":"","text":"","from":{},"created_time":null}`,
 			comment: Comment{},
 		},
 		{
@@ -70,7 +70,7 @@ func TestCommentJSON(t *testing.T) {
 		},
 		{
 			desc: "round trip",
-			json: `{"id":"123","text":"","from":{"id":"","username":"","first_name":"","last_name":"","full_name":"","profile_picture":"","bio":"","website":""},"created_time":"1550173420"}`,
+			json: `{"id":"123","text":"","from":{},"created_time":"1550173420"}`,
 			comment: Comment{
 				Id:          "123",
 				CreatedTime: time.Date(2019, 2, 14, 19, 43, 40, 0, time.UTC),
@@ -109,7 +109,7 @@ func TestLocationJSON(t *testing.T) {
 	}{
 		{
 			desc:     "zero value",
-			json:     `{"id":"","name":"","latitude":0,"longitude":0}`,
+			json:     `{"id":""}`,
 			location: Location{},
 		},
 		{
@@ -120,7 +120,7 @@ func TestLocationJSON(t *testing.T) {
 		},
 		{
 			desc: "round trip with string",
-			json: `{"id":"123","name":"florida","latitude":0,"longitude":0}`,
+			json: `{"id":"123","name":"florida"}`,
 			location: Location{
 				Id:   "123",
 				Name: "florida",
@@ -128,7 +128,7 @@ func TestLocationJSON(t *testing.T) {
 		},
 		{
 			desc: "round trip with number",
-			json: `{"id":123,"name":"florida","latitude":0,"longitude":0}`,
+			json: `{"id":123,"name":"florida"}`,
 			location: Location{
 				Id:   "123",
 				Name: "florida",
