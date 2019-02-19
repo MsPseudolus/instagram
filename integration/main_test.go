@@ -77,6 +77,12 @@ func TestGetRecentMedia(t *testing.T) {
 	if len(res.Medias) != 3 {
 		t.Error("Count didn't apply")
 	}
+
+	media := res.Medias[0]
+
+	if media.CreatedTime == "" {
+		t.Errorf("CreatedTime is empty")
+	}
 }
 
 func TestGetRecentMediaPagination(t *testing.T) {
