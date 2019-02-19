@@ -71,7 +71,7 @@ func TestMediaTypes(t *testing.T) {
 				},
 
 				Location: Location{
-					Id:        float64(2.13051194e+08),
+					Id:        "213051194",
 					Name:      "Oakland, California",
 					Latitude:  37.8029,
 					Longitude: -122.2721,

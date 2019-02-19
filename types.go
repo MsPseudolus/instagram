@@ -75,7 +75,7 @@ type Comment struct {
 }
 
 type Likes struct {
-	Count int64  `json:"likes"`
+	Count int64  `json:"count"`
 	Data  []User `json:"data,omitempty"`
 }
 
@@ -101,10 +101,10 @@ type CarouselMedia struct {
 }
 
 type Location struct {
-	Id        string
-	Name      string
-	Latitude  float64
-	Longitude float64
+	Id        string  `json:"id"`
+	Name      string  `json:"name"`
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
 }
 
 // If another app uploaded the media, then this is the place it is given. As of 11/2013, Hipstamic is the only allowed app

@@ -2,6 +2,7 @@ package instagram
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -53,9 +54,48 @@ func (c *Comment) UnmarshalJSON(in []byte) error {
 	if err := json.Unmarshal(in, &cj); err != nil {
 		return err
 	}
-	if cj.CommentJSON != nil {
-		*c = Comment(*cj.CommentJSON)
-		c.CreatedTime = time.Time(cj.CreatedTime)
+	if cj.CommentJSON == nil {
+		return nil
+	}
+	*c = Comment(*cj.CommentJSON)
+	c.CreatedTime = time.Time(cj.CreatedTime)
+	return nil
+}
+
+// LocationJSON is Location for JSON.
+type LocationJSON Location
+
+type locationJSONWrapper struct {
+	ID interface{} `json:"id"`
+	*LocationJSON
+}
+
+// MarshalJSON implements JSON.
+func (l Location) MarshalJSON() ([]byte, error) {
+	ll := LocationJSON(l)
+	lj := locationJSONWrapper{l.Id, &ll}
+	return json.Marshal(lj)
+}
+
+// UnmarshalJSON implements JSON.
+func (l *Location) UnmarshalJSON(in []byte) error {
+	lj := locationJSONWrapper{}
+	if err := json.Unmarshal(in, &lj); err != nil {
+		return err
+	}
+	if lj.LocationJSON == nil {
+		return nil
+	}
+	*l = Location(*lj.LocationJSON)
+	switch v := lj.ID.(type) {
+	case nil:
+		// ok
+	case string:
+		l.Id = v
+	case float64:
+		l.Id = fmt.Sprintf("%0.f", v)
+	default:
+		return fmt.Errorf("unknown type for location id: %T", lj.ID)
 	}
 	return nil
 }
@@ -87,31 +127,3 @@ func (s *stringTime) UnmarshalJSON(in []byte) error {
 	*s = stringTime(t)
 	return nil
 }
-
-// StringUnixTime is a string that's actually unix time.
-type StringUnixTime string
-
-// Time returns a time.Time
-func (s StringUnixTime) Time() (t time.Time, err error) {
-	unix, err := strconv.ParseInt(string(s), 10, 64)
-	if err != nil {
-		return
-	}
-
-	t = time.Unix(unix, 0).UTC()
-	return
-}
-
-// LocationId is an ambiguous value that can become a string ID.
-type LocationId interface{}
-
-//func (l LocationId) String() string {
-//switch v := l.(type) {
-//case string:
-//return v
-//case int64:
-//return fmt.Sprintf("%d", v)
-//default:
-//return ""
-//}
-//}
