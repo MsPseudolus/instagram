@@ -17,11 +17,12 @@ import (
 )
 
 var (
-	baseUrl = "https://api.instagram.com/v1"
+	baseURL = "https://api.instagram.com/v1"
 )
 
-type Api struct {
-	ClientId             string
+// API is the Instagram API.
+type API struct {
+	ClientID             string
 	ClientSecret         string
 	AccessToken          string
 	EnforceSignedRequest bool
@@ -38,19 +39,20 @@ type Api struct {
 	Header http.Header
 }
 
-// Create an API with either a ClientId OR an accessToken. Only one is required. Access tokens are preferred because they keep rate limiting down.
+// New creates an API with either a ClientID OR an accessToken. Only one is
+// required. Access tokens are preferred because they keep rate limiting down.
 // If enforceSignedRequest is set to true, then clientSecret is required
-func New(clientId string, clientSecret string, accessToken string, enforceSignedRequest bool) *Api {
-	if clientId == "" && accessToken == "" {
-		panic("ClientId or AccessToken must be given to create an Api")
+func New(clientID string, clientSecret string, accessToken string, enforceSignedRequest bool) *API {
+	if clientID == "" && accessToken == "" {
+		panic("ClientID or AccessToken must be given to create an API")
 	}
 
 	if enforceSignedRequest && clientSecret == "" {
 		panic("ClientSecret is required for signed request")
 	}
 
-	return &Api{
-		ClientId:             clientId,
+	return &API{
+		ClientID:             clientID,
 		ClientSecret:         clientSecret,
 		AccessToken:          accessToken,
 		HTTPClient:           &http.Client{},
@@ -97,19 +99,19 @@ func buildGetRequest(urlStr string, params url.Values) (*http.Request, error) {
 	return http.NewRequest("GET", u.String(), nil)
 }
 
-func (api *Api) extendParams(p url.Values) url.Values {
+func (api *API) extendParams(p url.Values) url.Values {
 	if p == nil {
 		p = url.Values{}
 	}
 	if api.AccessToken != "" {
 		p.Set("access_token", api.AccessToken)
 	} else {
-		p.Set("client_id", api.ClientId)
+		p.Set("client_id", api.ClientID)
 	}
 	return p
 }
 
-func (api *Api) get(ctx context.Context, path string, params url.Values, r interface{}) error {
+func (api *API) get(ctx context.Context, path string, params url.Values, r interface{}) error {
 	params = api.extendParams(params)
 	// Sign request if ForceSignedRequest is set to true
 	if api.EnforceSignedRequest {
@@ -123,7 +125,7 @@ func (api *Api) get(ctx context.Context, path string, params url.Values, r inter
 	return api.do(ctx, req, r)
 }
 
-func (api *Api) do(ctx context.Context, req *http.Request, r interface{}) error {
+func (api *API) do(ctx context.Context, req *http.Request, r interface{}) error {
 	req = req.WithContext(ctx)
 	resp, err := api.HTTPClient.Do(req)
 	if err != nil {
@@ -143,7 +145,7 @@ func (api *Api) do(ctx context.Context, req *http.Request, r interface{}) error 
 	return api.decodeResponse(resp.Body, r)
 }
 
-func (api *Api) decodeResponse(body io.Reader, to interface{}) error {
+func (api *API) decodeResponse(body io.Reader, to interface{}) error {
 
 	var r io.Reader
 	if api.KeepRawBody {
@@ -162,7 +164,7 @@ func (api *Api) decodeResponse(body io.Reader, to interface{}) error {
 	return nil
 }
 
-func (api *Api) apiError(resp *http.Response) error {
+func (api *API) apiError(resp *http.Response) error {
 	m := new(metaResponse)
 	if err := api.decodeResponse(resp.Body, m); err != nil {
 		return err
@@ -178,9 +180,10 @@ func (api *Api) apiError(resp *http.Response) error {
 }
 
 func urlify(path string) string {
-	return baseUrl + path
+	return baseURL + path
 }
 
+// MetaError is an error from response metadata.
 type MetaError Meta
 
 func (m *MetaError) Error() string {

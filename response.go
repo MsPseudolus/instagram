@@ -30,8 +30,8 @@ type CommentsResponse struct {
 
 // Pagination describes how to get the next page of results.
 type Pagination struct {
-	NextUrl   string `json:"next_url"`
-	NextMaxId string `json:"next_max_id"`
+	NextURL   string `json:"next_url"`
+	NextMaxID string `json:"next_max_id"`
 }
 
 // Meta is the response information.

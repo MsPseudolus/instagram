@@ -8,7 +8,7 @@ import (
 // api.NextMedias() call to a channel of media.  Media will be passed in the
 // reverse order of individual requests, for instance GetUserRecentMedia will
 // go in reverse CreatedTime order.  Use context to cancel iteration.
-func (api *Api) IterateMedia(ctx context.Context, res *PaginatedMediasResponse) (<-chan *Media, <-chan error) {
+func (api *API) IterateMedia(ctx context.Context, res *PaginatedMediasResponse) (<-chan *Media, <-chan error) {
 	mediaChan := make(chan *Media)
 	errChan := make(chan error, 1)
 

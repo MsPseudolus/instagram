@@ -30,7 +30,7 @@ func TestMain(m *testing.M) {
 	os.Exit(exit)
 }
 
-func newAPI() *instagram.Api {
+func newAPI() *instagram.API {
 	return integration.NewAPI()
 }
 

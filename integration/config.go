@@ -20,7 +20,7 @@ var (
 )
 
 // NewAPI initializes an API configured with environment variables.
-func NewAPI() *instagram.Api {
+func NewAPI() *instagram.API {
 	loadConfig()
 	return instagram.New(clientID, clientSecret, accessToken, true)
 }
