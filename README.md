@@ -10,7 +10,7 @@ Modernized and updated to match changes to the Instagram API.
 Changes from the original:
 
 * [x] Removed deprecated API endpoints (which are many)
-* [ ] Added support for new media type "carousel"
+* [x] Added support for new media type "carousel"
 * [ ] Added support for OAuth flow to retrieve access token
 * [x] Added go module
 * [x] Added support for non-default `http.Client`
@@ -44,12 +44,12 @@ export TEST_INSTAGRAM_ACCESS_TOKEN=<access token>
 
 #### Adding a test fixture
 
-The `cli` package contains a simple command line tool to query the media endpoint. You
+The `cmd` package contains a simple command line tools to query endpoints. You
 can use it to return sample data, then save it as a new fixture. Here's the command used
 to add the 'video' fixture.
 
 ```
-go run cli/cli.go -count 1 -maxid 1979319391662961209_11073382793 -raw | jq . > testdata/video.json
+go run cmd/list/main.go -count 1 -maxid 1979319391662961209_11073382793 -raw | jq . > testdata/video.json
 ```
 
 ## License
