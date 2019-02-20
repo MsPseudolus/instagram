@@ -304,3 +304,52 @@ func TestMediaTypes(t *testing.T) {
 		})
 	}
 }
+
+func TestComments(t *testing.T) {
+	tests := []struct {
+		desc         string
+		fix          string
+		wantComments int
+		wantComment  Comment
+	}{
+		{
+			desc:         "comments",
+			fix:          "comments",
+			wantComments: 3,
+			wantComment: Comment{
+				ID: "18034730665003447",
+				From: User{
+					Username: "rcarver",
+				},
+				Text:        "That’s about right.",
+				CreatedTime: time.Date(2019, 2, 14, 20, 56, 17, 0, time.UTC),
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			api, server := newTestAPIServer(t, func(r *http.Request) string {
+				return tt.fix
+			})
+			defer server.Close()
+
+			ctx := context.Background()
+			resp, err := api.GetMediaRecentComments(ctx, "123")
+			if err != nil {
+				t.Fatalf("GetMediaRecentComments: %s", err)
+			}
+
+			if got, want := len(resp.Comments), tt.wantComments; got != want {
+				t.Fatalf("Want %d comments back, got %d", want, got)
+			}
+
+			got := resp.Comments[0]
+
+			if !reflect.DeepEqual(got, tt.wantComment) {
+				t.Errorf("Comments not equal\nhave: %#v\nwant: %#v", got, tt.wantComment)
+				pretty.Ldiff(t, got, tt.wantComment)
+			}
+		})
+	}
+}
