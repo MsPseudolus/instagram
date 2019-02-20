@@ -85,7 +85,7 @@ type MediaVariants struct {
 // MediaVariant is a specific variant of the media.
 type MediaVariant struct {
 	ID     string `json:"id,omitempty"`
-	Url    string `json:"url"`
+	URL    string `json:"url"`
 	Width  int64  `json:"width"`
 	Height int64  `json:"height"`
 }
@@ -110,6 +110,6 @@ type Location struct {
 // is given. As of 11/2013, Hipstamic is the only allowed app
 type Attribution struct {
 	Website   string
-	ItunesUrl string
+	ItunesURL string
 	Name      string
 }
