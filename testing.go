@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func newTestAPIServer(t *testing.T, fix func(*http.Request) string) (*Api, *httptest.Server) {
+func newTestAPIServer(t *testing.T, fix func(*http.Request) string) (*API, *httptest.Server) {
 	httpClient, mux, server := initTestServer()
 
 	mux.HandleFunc("/v1/", func(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +32,7 @@ func newTestAPIServer(t *testing.T, fix func(*http.Request) string) (*Api, *http
 		io.Copy(w, f)
 	})
 
-	api := &Api{
+	api := &API{
 		EnforceSignedRequest: true,
 		HTTPClient:           httpClient,
 	}

@@ -1,115 +1,115 @@
 package instagram
 
-// Instagram User Object. Note that user objects are not always fully returned.
-// Be sure to see the descriptions on the instagram documentation for any given endpoint.
+import "time"
+
+// User is the instagram user. This struct is used in several contexts, each of
+// which may populate different data.
 type User struct {
-	Id             string `json:"id"`
-	Username       string `json:"username"`
-	FirstName      string `json:"first_name"`
-	LastName       string `json:"last_name"`
-	FullName       string `json:"full_name"`
-	ProfilePicture string `json:"profile_picture"`
-	Bio            string
-	Website        string
-	Counts         *UserCounts
+	ID             string      `json:"id,omitempty"`
+	Username       string      `json:"username,omitempty"`
+	FirstName      string      `json:"first_name,omitempty"`
+	LastName       string      `json:"last_name,omitempty"`
+	FullName       string      `json:"full_name,omitempty"`
+	ProfilePicture string      `json:"profile_picture,omitempty"`
+	Bio            string      `json:"bio,omitempty"`
+	Website        string      `json:"website,omitempty"`
+	Counts         *UserCounts `json:"counts,omitempty"`
 }
 
-// Instagram User Counts object. Returned on User objects
+// UserCounts is information about the user's counts.
 type UserCounts struct {
-	Media      int64
-	Follows    int64
+	Media      int64 `json:"media"`
+	Follows    int64 `json:"follows"`
 	FollowedBy int64 `json:"followed_by"`
 }
 
-// Instagram Media object
+// Media is the overall wrapper for any kind of Instagram media.
 type Media struct {
-	Type           string
-	Id             string
-	UsersInPhoto   []UserPosition `json:"users_in_photo"`
-	Filter         string
-	Tags           []string
-	Comments       Comments
-	Caption        Caption
-	Likes          Likes
-	Link           string
-	User           User
-	CreatedTime    StringUnixTime `json:"created_time"`
-	Images         Images
-	Videos         Images
+	Type           string          `json:"type"`
+	ID             string          `json:"id"`
+	UsersInPhoto   []UserPosition  `json:"users_in_photo"`
+	Filter         string          `json:"filter"`
+	Tags           []string        `json:"tags"`
+	Comments       Comments        `json:"comments"`
+	Caption        Comment         `json:"caption"`
+	Likes          Likes           `json:"likes"`
+	Link           string          `json:"link"`
+	User           User            `json:"user"`
+	CreatedTime    time.Time       `json:"created_time"`
+	Images         MediaVariants   `json:"images"`
+	Videos         MediaVariants   `json:"videos"`
 	CarouselMedias []CarouselMedia `json:"carousel_media"`
-	Location       Location
-	UserHasLiked   bool `json:"user_has_liked"`
-	Attribution    *Attribution
+	Location       Location        `json:"location"`
+	UserHasLiked   bool            `json:"user_has_liked"`
+	Attribution    *Attribution    `json:"attribution,omitempty"`
 }
 
-// A pair of user object and position
+// UserPosition describes a user tagged in a media.
 type UserPosition struct {
-	User     User
-	Position Position
+	User     User     `json:"user"`
+	Position Position `json:"position"`
 }
 
-// A position in a media
+// Position is the position of a tagged user.
 type Position struct {
-	X float64
-	Y float64
+	X float64 `json:"x"`
+	Y float64 `json:"y"`
 }
 
-// Instagram tag
-type Tag struct {
-	MediaCount int64 `json:"media_count"`
-	Name       string
-}
-
+// Comments decribes the comments on a media.
 type Comments struct {
-	Count int64
-	Data  []Comment
+	Count int64 `json:"count"`
 }
 
+// Comment is a comment on a media.
 type Comment struct {
-	CreatedTime StringUnixTime `json:"created_time"`
-	Text        string
-	From        User
-	Id          string
+	ID          string    `json:"id"`
+	Text        string    `json:"text"`
+	From        User      `json:"from"`
+	CreatedTime time.Time `json:"created_time"`
 }
 
-type Caption Comment
-
+// Likes describes the likes on a media.
 type Likes struct {
-	Count int64
-	Data  []User
+	Count int64 `json:"count"`
 }
 
-type Images struct {
-	LowResolution      Image `json:"low_resolution"`
-	LowBandwidth       Image `json:"low_bandwidth"`
-	Thumbnail          Image
-	StandardResolution Image `json:"standard_resolution"`
+// MediaVariants is the set of represetations of the media.
+type MediaVariants struct {
+	LowResolution      *MediaVariant `json:"low_resolution,omitempty"`
+	LowBandwidth       *MediaVariant `json:"low_bandwidth,omitempty"`
+	Thumbnail          *MediaVariant `json:"thumbnail,omitempty"`
+	StandardResolution *MediaVariant `json:"standard_resolution,omitempty"`
 }
 
-type Image struct {
-	Id     string
-	Url    string
-	Width  int64
-	Height int64
+// MediaVariant is a specific variant of the media.
+type MediaVariant struct {
+	ID     string `json:"id,omitempty"`
+	URL    string `json:"url"`
+	Width  int64  `json:"width"`
+	Height int64  `json:"height"`
 }
 
+// CarouselMedia describes a carousel media type.
 type CarouselMedia struct {
-	Type         string
-	Images       Images
-	Videos       Images
+	Type         string         `json:"type"`
+	Images       MediaVariants  `json:"images"`
+	Videos       MediaVariants  `json:"videos"`
 	UsersInPhoto []UserPosition `json:"users_in_photo"`
 }
 
+// Location is the location of a media.
 type Location struct {
-	Id        LocationId
-	Name      string
-	Latitude  float64
-	Longitude float64
+	ID        string  `json:"id,omitempty"`
+	Name      string  `json:"name,omitempty"`
+	Latitude  float64 `json:"latitude,omitempty"`
+	Longitude float64 `json:"longitude,omitempty"`
 }
 
-// If another app uploaded the media, then this is the place it is given. As of 11/2013, Hipstamic is the only allowed app
+// Attribution is if another app uploaded the media, then this is the place it
+// is given. As of 11/2013, Hipstamic is the only allowed app
 type Attribution struct {
 	Website   string
-	ItunesUrl string
+	ItunesURL string
 	Name      string
 }

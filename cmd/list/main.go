@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"io"
 	"log"
@@ -18,18 +19,18 @@ func main() {
 	var (
 		count int
 		maxID string
-		raw   bool
+		out   string
 	)
 
 	flag.IntVar(&count, "count", 3, "number of records to return")
 	flag.StringVar(&maxID, "maxid", "", "max_id for request")
-	flag.BoolVar(&raw, "raw", false, "write raw output or parsed output")
+	flag.StringVar(&out, "out", "json", "output: json,go,raw")
 	flag.Parse()
 
 	ctx := context.Background()
 
 	api := integration.NewAPI()
-	api.KeepRawBody = raw
+	api.KeepRawBody = out == "raw"
 
 	params := url.Values{}
 	params.Set("count", strconv.Itoa(count))
@@ -40,11 +41,19 @@ func main() {
 		log.Fatalf("GetRecentMedia: %s", err)
 	}
 
-	if raw {
-		io.Copy(os.Stdout, api.RawBody)
-		os.Exit(0)
+	switch out {
+	case "raw":
+		_, err = io.Copy(os.Stdout, api.RawBody)
+	case "go":
+		pretty.Fprintf(os.Stdout, "%# v", resp)
+	case "json":
+		enc := json.NewEncoder(os.Stdout)
+		enc.SetIndent("", "  ")
+		err = enc.Encode(resp)
 	}
-
-	pretty.Fprintf(os.Stdout, "%# v", resp)
+	if err != nil {
+		log.Fatalf("Writing output: %v", err)
+	}
 	os.Exit(0)
+
 }
