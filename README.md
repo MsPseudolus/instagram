@@ -11,7 +11,7 @@ Changes from the original:
 
 * [x] Removed deprecated API endpoints (which are many)
 * [x] Added support for new media type "carousel"
-* [ ] Added support for OAuth flow to retrieve access token
+* [x] Added support for OAuth flow to retrieve access token
 * [x] Added go module
 * [x] Added support for non-default `http.Client`
 * [x] Added support for `context.Context`
@@ -41,6 +41,18 @@ export TEST_INSTAGRAM_CLIENT_ID=<client id>
 export TEST_INSTAGRAM_CLIENT_SECRET=<client secret>
 export TEST_INSTAGRAM_ACCESS_TOKEN=<access token>
 ```
+
+#### Getting an access token
+
+You can retrieve an access token by setting the client id and client secret environment variables,
+then using the command line tool:
+
+```
+go run cmd/accesstoken/main.go
+```
+
+You'll need to open a URL in your browser, and log into Instagram. Then paste
+the resulting redirect URL back to the tool and it'll give you an Access Token.
 
 #### Adding a test fixture
 
