@@ -19,6 +19,13 @@ var (
 	accessToken  string
 )
 
+// NewOAuth initializes an OAuth flow with environment variables.
+func NewOAuth() instagram.OAuth {
+	loadConfig()
+	redirect := "http://localhost/"
+	return instagram.NewOAuth(clientID, clientSecret, redirect)
+}
+
 // NewAPI initializes an API configured with environment variables.
 func NewAPI() *instagram.API {
 	loadConfig()
